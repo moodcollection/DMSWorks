@@ -672,8 +672,13 @@
     background: var(--white);
   }
 
-  thead th:first-child { width: 40%; }
+ thead th:first-child { width: 40%; }
 
+@media (max-width: 600px) {
+  .comparison-wrap table { font-size: 0.72rem; }
+  thead th, tbody td { padding: 10px 8px; }
+  thead th:first-child { width: 36%; }
+}
   tbody td {
     padding: 16px 20px;
     border-bottom: 1px solid var(--grey-border);
