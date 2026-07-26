@@ -484,6 +484,22 @@ footer p { font-size: 0.78rem; }
     .success-hero h1 { font-size: 2.4rem; }
   }
 
+
+  /* ─── CHECKBOX GROUP ERROR ─── */
+  .check-grid.cb-error .check-label {
+    border-color: #DC2626;
+  }
+  .cb-error-msg {
+    display: none;
+    color: #DC2626;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 8px;
+    padding-left: 2px;
+  }
+  .cb-error-msg.visible { display: block; }
+  .radio-row.cb-error .check-label { border-color: #DC2626; }
+
 </style>
 </head>
 <body>
@@ -553,25 +569,25 @@ footer p { font-size: 0.78rem; }
             <input type="email" name="client_email" placeholder="your@email.com" required>
           </div>
           <div class="form-group">
-            <label>Phone Number <span class="helper">(optional)</span></label>
-            <input type="tel" name="client_phone" placeholder="+44 7700 900000">
+            <label>Phone Number</label>
+            <input type="tel" name="client_phone" required placeholder="+44 7700 900000">
           </div>
         </div>
         <div class="form-group">
           <label>What does your business do?</label>
-          <textarea name="biz_description" placeholder="Describe your products or services in your own words&#8230;" style="min-height:100px;"></textarea>
+          <textarea name="biz_description" required placeholder="Describe your products or services in your own words&#8230;" style="min-height:100px;"></textarea>
         </div>
         <div class="form-group">
           <label>Who is your ideal customer?</label>
-          <textarea name="ideal_customer" placeholder="e.g. Women aged 25&#8211;45, based in London, interested in sustainable fashion&#8230;" style="min-height:85px;"></textarea>
+          <textarea name="ideal_customer" required placeholder="e.g. Women aged 25&#8211;45, based in London, interested in sustainable fashion&#8230;" style="min-height:85px;"></textarea>
         </div>
         <div class="form-group">
           <label>What makes your business different?</label>
-          <textarea name="differentiator" placeholder="What sets you apart from others in your industry?" style="min-height:85px;"></textarea>
+          <textarea name="differentiator" required placeholder="What sets you apart from others in your industry?" style="min-height:85px;"></textarea>
         </div>
         <div class="form-group">
-          <label>Do you have a slogan or tagline? <span class="helper">(optional)</span></label>
-          <input type="text" name="tagline" placeholder="e.g. Your Mood, Your Style">
+          <label>Do you have a slogan or tagline?</label>
+          <input type="text" name="tagline" required placeholder="e.g. Your Mood, Your Style">
         </div>
       </div>
 
@@ -580,7 +596,7 @@ footer p { font-size: 0.78rem; }
         <span class="section-sub">What do you need your website to do for your business?</span>
         <div class="form-group">
           <span class="check-group-label">What is the main purpose of your website?</span>
-          <div class="check-grid">
+          <div class="check-grid" id="grid-goal">
             <div class="check-label"><input type="checkbox" name="goal" value="Generate enquiries" id="cb-1"><label for="cb-1">Generate enquiries</label></div>
             <div class="check-label"><input type="checkbox" name="goal" value="Promote services" id="cb-2"><label for="cb-2">Promote services</label></div>
             <div class="check-label"><input type="checkbox" name="goal" value="Sell products" id="cb-3"><label for="cb-3">Sell products</label></div>
@@ -594,7 +610,7 @@ footer p { font-size: 0.78rem; }
         </div>
         <div class="form-group">
           <label>What would you like visitors to do after visiting your website?</label>
-          <textarea name="visitor_action" placeholder="e.g. Book a consultation, make a purchase, send an enquiry&#8230;" style="min-height:80px;"></textarea>
+          <textarea name="visitor_action" required placeholder="e.g. Book a consultation, make a purchase, send an enquiry&#8230;" style="min-height:80px;"></textarea>
         </div>
       </div>
 
@@ -602,16 +618,16 @@ footer p { font-size: 0.78rem; }
         <h2>Your Brand</h2>
         <span class="section-sub">Help me understand your visual identity and tone.</span>
         <div class="form-group">
-          <label>Brand colours <span class="helper">(optional)</span></label>
-          <input type="text" name="brand_colours" placeholder="e.g. Navy blue, gold, cream &#8212; or share hex codes if you have them">
+          <label>Brand colours</label>
+          <input type="text" name="brand_colours" required placeholder="e.g. Navy blue, gold, cream &#8212; or share hex codes if you have them">
         </div>
         <div class="form-group">
-          <label>Preferred fonts <span class="helper">(optional)</span></label>
-          <input type="text" name="fonts" placeholder="e.g. Serif headings, clean sans-serif body text">
+          <label>Preferred fonts</label>
+          <input type="text" name="fonts" required placeholder="e.g. Serif headings, clean sans-serif body text">
         </div>
         <div class="form-group">
           <label>Describe your brand in three words</label>
-          <input type="text" name="brand_words" placeholder="e.g. Modern, Luxury, Friendly &#8212; Bold, Minimalist, Playful">
+          <input type="text" name="brand_words" required placeholder="e.g. Modern, Luxury, Friendly &#8212; Bold, Minimalist, Playful">
         </div>
       </div>
 
@@ -620,19 +636,19 @@ footer p { font-size: 0.78rem; }
         <span class="section-sub">Show me what catches your eye &#8212; good and bad.</span>
         <div class="form-group">
           <label>Share websites you love</label>
-          <textarea name="liked_sites" placeholder="Paste links or name businesses whose websites you admire&#8230;" style="min-height:80px;"></textarea>
+          <textarea name="liked_sites" required placeholder="Paste links or name businesses whose websites you admire&#8230;" style="min-height:80px;"></textarea>
         </div>
         <div class="form-group">
           <label>What do you like about them?</label>
-          <textarea name="liked_reasons" placeholder="e.g. Clean layout, strong photography, easy navigation&#8230;" style="min-height:75px;"></textarea>
+          <textarea name="liked_reasons" required placeholder="e.g. Clean layout, strong photography, easy navigation&#8230;" style="min-height:75px;"></textarea>
         </div>
         <div class="form-group">
-          <label>Are there any websites you dislike? <span class="helper">(optional)</span></label>
-          <textarea name="disliked_sites" placeholder="Links or names&#8230;" style="min-height:65px;"></textarea>
+          <label>Are there any websites you dislike?</label>
+          <textarea name="disliked_sites" required placeholder="Links or names&#8230;" style="min-height:65px;"></textarea>
         </div>
         <div class="form-group">
-          <label>Why? <span class="helper">(optional)</span></label>
-          <textarea name="disliked_reasons" placeholder="e.g. Too busy, hard to navigate&#8230;" style="min-height:65px;"></textarea>
+          <label>Why?</label>
+          <textarea name="disliked_reasons" required placeholder="e.g. Too busy, hard to navigate&#8230;" style="min-height:65px;"></textarea>
         </div>
       </div>
 
@@ -640,7 +656,7 @@ footer p { font-size: 0.78rem; }
         <h2>Website Pages</h2>
         <span class="section-sub">Which pages would you like on your website?</span>
         <div class="form-group">
-          <div class="check-grid">
+          <div class="check-grid" id="grid-page">
             <div class="check-label"><input type="checkbox" name="page" value="Home" id="cb-7"><label for="cb-7">Home</label></div>
             <div class="check-label"><input type="checkbox" name="page" value="About" id="cb-8"><label for="cb-8">About</label></div>
             <div class="check-label"><input type="checkbox" name="page" value="Services" id="cb-9"><label for="cb-9">Services</label></div>
@@ -662,7 +678,7 @@ footer p { font-size: 0.78rem; }
         <span class="section-sub">Tell me what you already have &#8212; and what you might need help with.</span>
         <div class="form-group">
           <span class="check-group-label">Do you already have any of the following?</span>
-          <div class="check-grid">
+          <div class="check-grid" id="grid-asset">
             <div class="check-label"><input type="checkbox" name="asset" value="Logo" id="cb-16"><label for="cb-16">Logo</label></div>
             <div class="check-label"><input type="checkbox" name="asset" value="Brand photos" id="cb-17"><label for="cb-17">Brand photos</label></div>
             <div class="check-label"><input type="checkbox" name="asset" value="Product/service photos" id="cb-18"><label for="cb-18">Product/service photos</label></div>
@@ -672,13 +688,15 @@ footer p { font-size: 0.78rem; }
             <div class="check-label"><input type="checkbox" name="asset" value="Pricing" id="cb-22"><label for="cb-22">Pricing</label></div>
             <div class="check-label"><input type="checkbox" name="asset" value="FAQs" id="cb-23"><label for="cb-23">FAQs</label></div>
           </div>
+          <div class="cb-error-msg" id="err-asset">Please select at least one option.</div>
         </div>
         <div class="form-group" style="margin-top:8px;">
           <span class="check-group-label">Would you like support creating content for your website?</span>
-          <div class="radio-row">
+          <div class="radio-row" id="grid-content_support">
             <div class="check-label"><input type="radio" name="content_support" value="Yes please" id="cb-24"><label for="cb-24">Yes please</label></div>
             <div class="check-label"><input type="radio" name="content_support" value="No, I have it covered" id="cb-25"><label for="cb-25">No, I have it covered</label></div>
           </div>
+          <div class="cb-error-msg" id="err-content_support">Please select one option.</div>
         </div>
       </div>
 
@@ -686,7 +704,7 @@ footer p { font-size: 0.78rem; }
         <h2>Features</h2>
         <span class="section-sub">Which features would you like included on your website?</span>
         <div class="form-group">
-          <div class="check-grid">
+          <div class="check-grid" id="grid-feature">
             <div class="check-label"><input type="checkbox" name="feature" value="Contact form" id="cb-26"><label for="cb-26">Contact form</label></div>
             <div class="check-label"><input type="checkbox" name="feature" value="Booking system" id="cb-27"><label for="cb-27">Booking system</label></div>
             <div class="check-label"><input type="checkbox" name="feature" value="WhatsApp button" id="cb-28"><label for="cb-28">WhatsApp button</label></div>
@@ -710,21 +728,23 @@ footer p { font-size: 0.78rem; }
         <span class="section-sub">Help me understand your current setup.</span>
         <div class="form-group">
           <span class="check-group-label">Do you already own a domain name?</span>
-          <div class="radio-row">
+          <div class="radio-row" id="grid-has_domain">
             <div class="check-label"><input type="radio" name="has_domain" value="Yes" id="cb-37"><label for="cb-37">Yes</label></div>
             <div class="check-label"><input type="radio" name="has_domain" value="No" id="cb-38"><label for="cb-38">No</label></div>
           </div>
+          <div class="cb-error-msg" id="err-has_domain">Please select one option.</div>
         </div>
         <div class="form-group">
-          <label>If yes, what is it? <span class="helper">(optional)</span></label>
-          <input type="text" name="domain_name" placeholder="e.g. yourbusiness.co.uk">
+          <label>If yes, what is it?</label>
+          <input type="text" name="domain_name" required placeholder="e.g. yourbusiness.co.uk">
         </div>
         <div class="form-group">
           <span class="check-group-label">Do you already have a business email address?</span>
-          <div class="radio-row">
+          <div class="radio-row" id="grid-has_email">
             <div class="check-label"><input type="radio" name="has_email" value="Yes" id="cb-39"><label for="cb-39">Yes</label></div>
             <div class="check-label"><input type="radio" name="has_email" value="No" id="cb-40"><label for="cb-40">No</label></div>
           </div>
+          <div class="cb-error-msg" id="err-has_email">Please select one option.</div>
         </div>
       </div>
 
@@ -733,19 +753,19 @@ footer p { font-size: 0.78rem; }
         <span class="section-sub">These last questions help me get the details right from the very start.</span>
         <div class="form-group">
           <label>If someone visited your website and remembered only one thing about your business, what would you want it to be?</label>
-          <textarea name="one_thing" placeholder="What's the single most important impression you want to leave?" style="min-height:85px;"></textarea>
+          <textarea name="one_thing" required placeholder="What's the single most important impression you want to leave?" style="min-height:85px;"></textarea>
         </div>
         <div class="form-group">
           <label>How would you like visitors to feel when they visit your website?</label>
-          <textarea name="visitor_feeling" placeholder="e.g. Inspired, reassured, excited, impressed&#8230;" style="min-height:75px;"></textarea>
+          <textarea name="visitor_feeling" required placeholder="e.g. Inspired, reassured, excited, impressed&#8230;" style="min-height:75px;"></textarea>
         </div>
         <div class="form-group">
-          <label>Is there anything you definitely do or don't want included? <span class="helper">(optional)</span></label>
-          <textarea name="exclusions" placeholder="e.g. No pop-ups, no stock imagery, must include a video&#8230;" style="min-height:75px;"></textarea>
+          <label>Is there anything you definitely do or don't want included?</label>
+          <textarea name="exclusions" required placeholder="e.g. No pop-ups, no stock imagery, must include a video&#8230;" style="min-height:75px;"></textarea>
         </div>
         <div class="form-group">
-          <label>Is there anything else you'd like me to know before I begin? <span class="helper">(optional)</span></label>
-          <textarea name="anything_else" placeholder="Any extra context, questions, or information&#8230;" style="min-height:85px;"></textarea>
+          <label>Is there anything else you'd like me to know before I begin?</label>
+          <textarea name="anything_else" required placeholder="Any extra context, questions, or information&#8230;" style="min-height:85px;"></textarea>
         </div>
       </div>
 
@@ -833,18 +853,50 @@ async function handleBrief(e) {
   const form = e.target;
   const btn = document.getElementById('brief-btn');
 
-  const required = form.querySelectorAll('[required]');
   let valid = true;
-  required.forEach(el => {
+  let firstError = null;
+
+  // ── Text / select field validation ──
+  form.querySelectorAll('[required]').forEach(el => {
     if (!el.value.trim()) {
       el.style.borderColor = '#DC2626';
-      if (valid) { el.focus(); el.scrollIntoView({behavior:'smooth',block:'center'}); }
+      if (!firstError) firstError = el;
       valid = false;
     } else {
       el.style.borderColor = '';
     }
   });
-  if (!valid) return;
+
+  // ── Checkbox / radio group validation ──
+  var cbGroups = [
+    { name: 'goal',            type: 'checkbox', gridId: 'grid-goal',            errId: 'err-goal' },
+    { name: 'page',            type: 'checkbox', gridId: 'grid-page',            errId: 'err-page' },
+    { name: 'asset',           type: 'checkbox', gridId: 'grid-asset',           errId: 'err-asset' },
+    { name: 'feature',         type: 'checkbox', gridId: 'grid-feature',         errId: 'err-feature' },
+    { name: 'content_support', type: 'radio',    gridId: 'grid-content_support', errId: 'err-content_support' },
+    { name: 'has_domain',      type: 'radio',    gridId: 'grid-has_domain',      errId: 'err-has_domain' },
+    { name: 'has_email',       type: 'radio',    gridId: 'grid-has_email',       errId: 'err-has_email' }
+  ];
+
+  cbGroups.forEach(function(grp) {
+    var checked = form.querySelectorAll('input[name="'+grp.name+'"]:checked').length > 0;
+    var grid    = document.getElementById(grp.gridId);
+    var errMsg  = document.getElementById(grp.errId);
+    if (!checked) {
+      if (grid)   grid.classList.add('cb-error');
+      if (errMsg) errMsg.classList.add('visible');
+      if (!firstError && grid) firstError = grid;
+      valid = false;
+    } else {
+      if (grid)   grid.classList.remove('cb-error');
+      if (errMsg) errMsg.classList.remove('visible');
+    }
+  });
+
+  if (!valid) {
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   btn.textContent = 'Submitting…';
   btn.disabled = true;
