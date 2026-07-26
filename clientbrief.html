@@ -688,7 +688,6 @@ footer p { font-size: 0.78rem; }
             <div class="check-label"><input type="checkbox" name="asset" value="Pricing" id="cb-22"><label for="cb-22">Pricing</label></div>
             <div class="check-label"><input type="checkbox" name="asset" value="FAQs" id="cb-23"><label for="cb-23">FAQs</label></div>
           </div>
-          <div class="cb-error-msg" id="err-asset">Please select at least one option.</div>
         </div>
         <div class="form-group" style="margin-top:8px;">
           <span class="check-group-label">Would you like support creating content for your website?</span>
@@ -696,7 +695,6 @@ footer p { font-size: 0.78rem; }
             <div class="check-label"><input type="radio" name="content_support" value="Yes please" id="cb-24"><label for="cb-24">Yes please</label></div>
             <div class="check-label"><input type="radio" name="content_support" value="No, I have it covered" id="cb-25"><label for="cb-25">No, I have it covered</label></div>
           </div>
-          <div class="cb-error-msg" id="err-content_support">Please select one option.</div>
         </div>
       </div>
 
@@ -732,7 +730,6 @@ footer p { font-size: 0.78rem; }
             <div class="check-label"><input type="radio" name="has_domain" value="Yes" id="cb-37"><label for="cb-37">Yes</label></div>
             <div class="check-label"><input type="radio" name="has_domain" value="No" id="cb-38"><label for="cb-38">No</label></div>
           </div>
-          <div class="cb-error-msg" id="err-has_domain">Please select one option.</div>
         </div>
         <div class="form-group">
           <label>If yes, what is it?</label>
@@ -744,7 +741,6 @@ footer p { font-size: 0.78rem; }
             <div class="check-label"><input type="radio" name="has_email" value="Yes" id="cb-39"><label for="cb-39">Yes</label></div>
             <div class="check-label"><input type="radio" name="has_email" value="No" id="cb-40"><label for="cb-40">No</label></div>
           </div>
-          <div class="cb-error-msg" id="err-has_email">Please select one option.</div>
         </div>
       </div>
 
@@ -856,40 +852,81 @@ async function handleBrief(e) {
   let valid = true;
   let firstError = null;
 
-  // ── Text / select field validation ──
-  form.querySelectorAll('[required]').forEach(el => {
+  // ── Helper: show or clear inline error under a field ──────────────────────
+  function fieldErr(el, msg) {
+    el.style.borderColor = '#DC2626';
+    var errId = 'fe-' + (el.name || el.id);
+    var existing = document.getElementById(errId);
+    if (!existing) {
+      var div = document.createElement('div');
+      div.id = errId;
+      div.style.cssText = 'color:#DC2626;font-size:0.78rem;font-weight:600;margin-top:6px;';
+      div.textContent = msg;
+      el.parentNode.insertBefore(div, el.nextSibling);
+    }
+    if (!firstError) firstError = el;
+    valid = false;
+  }
+
+  function fieldOk(el) {
+    el.style.borderColor = '';
+    var errId = 'fe-' + (el.name || el.id);
+    var existing = document.getElementById(errId);
+    if (existing) existing.remove();
+  }
+
+  // ── Helper: show or clear group error ─────────────────────────────────────
+  function groupErr(gridEl, msg) {
+    var errId = 'ge-' + gridEl.id;
+    var existing = document.getElementById(errId);
+    if (!existing) {
+      var div = document.createElement('div');
+      div.id = errId;
+      div.style.cssText = 'color:#DC2626;font-size:0.78rem;font-weight:600;margin-top:8px;';
+      div.textContent = msg;
+      gridEl.parentNode.insertBefore(div, gridEl.nextSibling);
+    }
+    gridEl.style.outline = '1.5px solid #DC2626';
+    gridEl.style.borderRadius = '8px';
+    if (!firstError) firstError = gridEl;
+    valid = false;
+  }
+
+  function groupOk(gridEl) {
+    var errId = 'ge-' + gridEl.id;
+    var existing = document.getElementById(errId);
+    if (existing) existing.remove();
+    gridEl.style.outline = '';
+    gridEl.style.borderRadius = '';
+  }
+
+  // ── 1. Text / select / textarea fields ────────────────────────────────────
+  form.querySelectorAll('[required]').forEach(function(el) {
     if (!el.value.trim()) {
-      el.style.borderColor = '#DC2626';
-      if (!firstError) firstError = el;
-      valid = false;
+      fieldErr(el, 'Please answer this question.');
     } else {
-      el.style.borderColor = '';
+      fieldOk(el);
     }
   });
 
-  // ── Checkbox / radio group validation ──
+  // ── 2. Checkbox & radio groups ────────────────────────────────────────────
   var cbGroups = [
-    { name: 'goal',            type: 'checkbox', gridId: 'grid-goal',            errId: 'err-goal' },
-    { name: 'page',            type: 'checkbox', gridId: 'grid-page',            errId: 'err-page' },
-    { name: 'asset',           type: 'checkbox', gridId: 'grid-asset',           errId: 'err-asset' },
-    { name: 'feature',         type: 'checkbox', gridId: 'grid-feature',         errId: 'err-feature' },
-    { name: 'content_support', type: 'radio',    gridId: 'grid-content_support', errId: 'err-content_support' },
-    { name: 'has_domain',      type: 'radio',    gridId: 'grid-has_domain',      errId: 'err-has_domain' },
-    { name: 'has_email',       type: 'radio',    gridId: 'grid-has_email',       errId: 'err-has_email' }
+    { name: 'goal',            gridId: 'grid-goal',            label: 'Please select at least one option.' },
+    { name: 'page',            gridId: 'grid-page',            label: 'Please select at least one option.' },
+    { name: 'asset',           gridId: 'grid-asset',           label: 'Please select at least one option.' },
+    { name: 'feature',         gridId: 'grid-feature',         label: 'Please select at least one option.' },
+    { name: 'content_support', gridId: 'grid-content_support', label: 'Please select one option.' },
+    { name: 'has_domain',      gridId: 'grid-has_domain',      label: 'Please select one option.' },
+    { name: 'has_email',       gridId: 'grid-has_email',       label: 'Please select one option.' }
   ];
 
   cbGroups.forEach(function(grp) {
+    var gridEl  = document.getElementById(grp.gridId);
     var checked = form.querySelectorAll('input[name="'+grp.name+'"]:checked').length > 0;
-    var grid    = document.getElementById(grp.gridId);
-    var errMsg  = document.getElementById(grp.errId);
     if (!checked) {
-      if (grid)   grid.classList.add('cb-error');
-      if (errMsg) errMsg.classList.add('visible');
-      if (!firstError && grid) firstError = grid;
-      valid = false;
+      if (gridEl) groupErr(gridEl, grp.label);
     } else {
-      if (grid)   grid.classList.remove('cb-error');
-      if (errMsg) errMsg.classList.remove('visible');
+      if (gridEl) groupOk(gridEl);
     }
   });
 
@@ -977,6 +1014,46 @@ async function handleBrief(e) {
 document.querySelectorAll('[required]').forEach(el => {
   el.addEventListener('input', () => el.style.borderColor = '');
 });
+
+// ─── OTHER CHECKBOX TOGGLES
+['goal','page','feature'].forEach(function(grp) {
+  var cb = document.querySelector('input[name="'+grp+'"][value="Other"]');
+  if (!cb) return;
+  cb.addEventListener('change', function() {
+    var wrap = document.getElementById('other-'+grp+'-wrap');
+    if (wrap) wrap.style.display = cb.checked ? 'block' : 'none';
+  });
+});
+</script>
+</body>
+</html  // ─── CLEAR ERRORS ON CHANGE ──────────────────────────────────────────────
+  form.querySelectorAll('[required]').forEach(function(el) {
+    el.addEventListener('input', function() {
+      if (el.value.trim()) {
+        el.style.borderColor = '';
+        var errId = 'fe-' + (el.name || el.id);
+        var existing = document.getElementById(errId);
+        if (existing) existing.remove();
+      }
+    });
+  });
+
+  // Clear checkbox/radio group errors on any selection
+  ['goal','page','asset','feature','content_support','has_domain','has_email'].forEach(function(grp) {
+    document.querySelectorAll('input[name="'+grp+'"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (document.querySelectorAll('input[name="'+grp+'"]:checked').length > 0) {
+          var gridEl = document.getElementById('grid-' + grp);
+          if (gridEl) {
+            gridEl.style.outline = '';
+            gridEl.style.borderRadius = '';
+            var existing = document.getElementById('ge-grid-' + grp);
+            if (existing) existing.remove();
+          }
+        }
+      });
+    });
+  });
 
 // ─── OTHER CHECKBOX TOGGLES
 ['goal','page','feature'].forEach(function(grp) {
